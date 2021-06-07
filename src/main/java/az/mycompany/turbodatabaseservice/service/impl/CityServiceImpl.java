@@ -1,10 +1,11 @@
 package az.mycompany.turbodatabaseservice.service.impl;
 
 
-import az.company.turbo.dto.CityDto;
-import az.company.turbo.entity.CityEntity;
-import az.company.turbo.repository.CityRepository;
-import az.company.turbo.service.CityService;
+
+import az.mycompany.turbodatabaseservice.dto.CityDto;
+import az.mycompany.turbodatabaseservice.entity.CityEntity;
+import az.mycompany.turbodatabaseservice.repository.CityRepository;
+import az.mycompany.turbodatabaseservice.service.CityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,8 @@ public class CityServiceImpl implements CityService {
     @Override
     public ResponseEntity<?> delete(Integer id) {
         CityEntity entity = getById(id);
-        cityRepository.delete(entity);
+        entity.setStstus(false);
+        cityRepository.save(entity);
         return ResponseEntity.ok(String.format("Raw with %s id successfully deleted.", id));
     }
 
@@ -47,7 +49,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public ResponseEntity<List<CityDto>> get() {
         List<CityDto> list = cityRepository
-                .findAll().stream()
+                .findAllByStatus().stream()
                 .map(this::convertFromEntityToDto)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(list);

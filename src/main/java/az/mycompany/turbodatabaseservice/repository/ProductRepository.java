@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+
 import java.util.List;
 
 
@@ -30,10 +31,9 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
             " and CONCAT(' ',m.name) LIKE %:modelname% " +
             " and CONCAT(' ',ct.city_name) LIKE %:cityname%" +
             " and p.price between :minprice and :maxprice and " +
-            "p.release_year between :minYear and :maxYear ", nativeQuery = true)
+            "p.release_year between :minYear and :maxYear and status=true ", nativeQuery = true)
     List<ProductEntity> getProduct(@Param("brandname") String brandname, @Param("modelname") String modelname , @Param("cityname") String cityname, @Param("minprice")BigDecimal minprice, @Param("maxprice")BigDecimal maxprice, @Param("minYear") Short minYear, @Param("maxYear")Short maxYear);
 
-
-
-
+    @Query(value = "select * from product where status=true", nativeQuery = true)
+    List<ProductEntity>findAllByStatus();
 }

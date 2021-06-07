@@ -35,7 +35,8 @@ public class ContactInfoServiceImpl implements ContactInfoService {
     @Override
     public ResponseEntity<?> delete(Integer id) {
         ContactInfoEntity entity = getbById(id);
-        contactRepo.delete(entity);
+        entity.setStstus(false);
+        contactRepo.save(entity);
         return ResponseEntity.ok(String.format("Raw with %s id successfully deleted.", id));
     }
 
@@ -50,7 +51,7 @@ public class ContactInfoServiceImpl implements ContactInfoService {
     @Override
     public ResponseEntity<?> get() {
         List<ContactInfoDto> contact = contactRepo
-                .findAll()
+                .findAllByStatus()
                 .stream()
                 .map(this::convertFromEntityToDto)
                 .collect(Collectors.toList());

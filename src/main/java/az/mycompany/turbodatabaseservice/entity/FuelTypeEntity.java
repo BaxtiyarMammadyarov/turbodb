@@ -12,12 +12,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "fuel_type", schema = "turbo")
+@Table(name = "fuel_type", schema = "turbodb")
 public class FuelTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "fuel_name")
     private String name;
-
+    private boolean ststus=true;
 }

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "contact_info", schema = "turbo")
+@Table(name = "contact_info", schema = "turbodb")
 public class ContactInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,6 @@ public class ContactInfoEntity {
     @ManyToOne(targetEntity = CityEntity.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     private CityEntity cityEntity;
-
+    private boolean ststus=true;
 
 }

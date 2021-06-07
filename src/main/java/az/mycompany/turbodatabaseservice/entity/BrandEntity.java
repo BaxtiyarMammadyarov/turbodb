@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "brand", schema = "turbo")
+@Table(name = "brand", schema = "turbodb")
 public class BrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,7 @@ public class BrandEntity {
     private int id;
     @Column(nullable = false, unique = true, length = 15)
     private String name;
+    private boolean ststus=true;
 
 
 }

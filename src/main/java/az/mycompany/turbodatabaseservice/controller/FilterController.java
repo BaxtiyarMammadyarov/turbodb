@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 
 @RestController
-@RequestMapping("/Filter")
+@RequestMapping("/filter")
 public class FilterController {
 
        private final FilterService service;

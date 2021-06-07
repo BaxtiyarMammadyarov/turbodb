@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,4 +18,8 @@ public interface CityRepository extends JpaRepository<CityEntity, Integer> {
     void update(int id, String name);
 
     Optional<CityEntity> findByName(String name);
+   @Query(value = "select * from city where status=true",nativeQuery = true)
+   List<CityEntity> findAllByStatus();
+
+
 }

@@ -1,9 +1,10 @@
 package az.mycompany.turbodatabaseservice.service.impl;
 
-import az.company.turbo.dto.BrandDto;
-import az.company.turbo.entity.BrandEntity;
-import az.company.turbo.repository.BrandRepository;
-import az.company.turbo.service.BrandService;
+
+import az.mycompany.turbodatabaseservice.dto.BrandDto;
+import az.mycompany.turbodatabaseservice.entity.BrandEntity;
+import az.mycompany.turbodatabaseservice.repository.BrandRepository;
+import az.mycompany.turbodatabaseservice.service.BrandService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,8 @@ public class BrandServiceImpl implements BrandService {
 
     public ResponseEntity<String> delete(Integer id) {
         BrandEntity entity = getById(id);
-        brandRepository.delete(entity);
+        entity.setStstus(false);
+        brandRepository.save(entity);
         return ResponseEntity.ok(String.format("Raw with %s id successfully deleted.", id));
     }
 
@@ -50,7 +52,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public ResponseEntity<?> get() {
-        List<BrandDto> dtoList = brandRepository.findAll().stream()
+        List<BrandDto> dtoList = brandRepository.findAllByStatus().stream()
                 .map(this::convertFromEntityToDto)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtoList);

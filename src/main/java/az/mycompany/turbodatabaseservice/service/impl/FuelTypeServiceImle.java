@@ -33,7 +33,8 @@ public class FuelTypeServiceImle implements FuelTypeService {
     @Override
     public ResponseEntity<?> delete(Integer integer) {
         FuelTypeEntity entity = getById(integer);
-        fuelTypeRepository.delete(entity);
+        entity.setStstus(false);
+        fuelTypeRepository.save(entity);
         return ResponseEntity.ok(String.format("Raw with %s id successfully deleted.", integer));
 
     }
@@ -50,7 +51,7 @@ public class FuelTypeServiceImle implements FuelTypeService {
     @Override
     public ResponseEntity<?> get() {
         List<FuelTypeDto> dtoList = fuelTypeRepository
-                .findAll().stream()
+                .findAllByStatus().stream()
                 .map(this::convertFromEntityToDto)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtoList);

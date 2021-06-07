@@ -39,7 +39,8 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public ResponseEntity<String> delete(Integer id) {
         ModelEntity entity = getById(id);
-        modelRepository.delete(entity);
+        entity.setStstus(false);
+        modelRepository.save(entity);
         return ResponseEntity.ok(String.format("Raw with %s id successfully deleted.", id));
     }
 
@@ -58,7 +59,7 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public ResponseEntity<?> get() {
         List<ModelDto> dtoList = modelRepository
-                .findAll()
+                .findAllByStatus()
                 .stream()
                 .map(this::convertFromEntityToDto)
                 .collect(Collectors.toList());

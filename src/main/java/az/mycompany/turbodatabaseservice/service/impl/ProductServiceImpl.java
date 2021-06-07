@@ -50,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseEntity<?> delete(Integer id) {
         ProductEntity entity = productRepository.findById(id).orElseThrow(() -> new RuntimeException("product id not founded."));
+       entity.setStstus(false);
         productRepository.delete(entity);
         return ResponseEntity.ok(String.format("Raw with %s id successfully deleted.", id));
     }
@@ -66,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseEntity<?> get() {
         List<ProductDto> list = productRepository
-                .findAll()
+                .findAllByStatus()
                 .stream()
                 .map(this::convertFromEntityToDto)
                 .collect(Collectors.toList());

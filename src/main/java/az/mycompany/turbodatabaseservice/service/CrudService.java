@@ -14,17 +14,4 @@ public interface CrudService<DTO, ID> {
     ResponseEntity<?> get();
 
 
-//    default ResponseEntity<?> create(ID id,DTO dto){
-//        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-//    }
-//    default ResponseEntity<?> delete(ID id){
-//        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-//    }
-//    default ResponseEntity<?> update(DTO dto){
-//        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-//    }
-//    default ResponseEntity<?> get(){
-//        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-//    }
-
 }

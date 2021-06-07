@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Getter
 
 @Entity
-@Table(name = "product", schema = "turbo")
+@Table(name = "product", schema = "turbodb")
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,5 +62,6 @@ public class ProductEntity {
     private float engineCapacity;
     @Enumerated(EnumType.STRING)
     private Transmission transmission;
+    private boolean ststus=true;
 
 }
